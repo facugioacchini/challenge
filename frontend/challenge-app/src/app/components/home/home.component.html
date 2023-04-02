@@ -1,1 +1,36 @@
-<p>home works!</p>
+<form [formGroup]="userForm">
+    <mat-form-field appearance="fill">
+        <mat-label>Nombre</mat-label>
+        <input matInput formControlName="nameFormControl">
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+        <mat-label>Apellido</mat-label>
+        <input matInput formControlName="lastNameFormControl">
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+        <mat-label>Correo electrónico</mat-label>
+        <input type="email" matInput formControlName="emailFormControl">
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+        <mat-label>Fecha de nacimiento</mat-label>
+        <input matInput [disabled]="true" [matDatepickerFilter]="dateFilter" [matDatepicker]="dp" formControlName="dateFormControl">
+        <mat-datepicker-toggle matIconSuffix [for]="dp" style="float: right;"></mat-datepicker-toggle>
+        <mat-datepicker #dp [disabled]="false"></mat-datepicker>
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+        <mat-label>Teléfono</mat-label>
+        <input matInput formControlName="phoneFormControl">
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+        <mat-label>País de residencia</mat-label>
+        <mat-select formControlName="countryFormControl">
+            <mat-option value="ARG">Argentina</mat-option>
+            <mat-option value="BRA">Brasil</mat-option>
+            <mat-option value="CRI">Costa Rica</mat-option>
+        </mat-select>
+    </mat-form-field>
+    <mat-checkbox formControlName="infoFormControl">¿Desea recibir información?</mat-checkbox>
+    <button type="submit" [disabled]="!userForm.valid" style="margin-top: 20px;" mat-raised-button (click)="saveUser()">
+        Registrar Usuario
+    </button>
+</form>
