@@ -33,13 +33,17 @@ export class HomeComponent implements OnInit {
   phoneFormControl: new FormControl('', [Validators.minLength(8), Validators.pattern("^[0-9]*$")]),
   countryFormControl: new FormControl('', [Validators.required]),
   infoFormControl: new FormControl(false)});
+  success: boolean = false;
+  error: boolean = false;
+  startDate = new Date(2010, 11, 31);
 
   dateFilter = (d: Date | null): boolean => {
-    const today = new Date();
+    const max = new Date(2010, 11, 31);
+    const min = new Date(1900, 0, 1);
     if (!d) {
       return false;
     }
-    return (d<=today);
+    return (d>=min && d<=max);
   };
 
   constructor(private UserService: UserService) { }
@@ -58,7 +62,13 @@ export class HomeComponent implements OnInit {
       this.userForm.controls['infoFormControl'].value,
     )
     this.UserService.createUser(usuario).subscribe((result: any) => {
-      console.log(result.body.statusCode)
+      if (result.body.statusCode == 200) {
+        this.success = true;
+        this.error = false;
+      } else {
+        this.success = false;
+        this.error = true;
+      }
     });
     
   }

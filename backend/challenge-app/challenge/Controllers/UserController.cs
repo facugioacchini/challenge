@@ -214,7 +214,8 @@ namespace challenge.Controllers
             try
             {
                 string connectionString = _configuration.GetSection("ConnectionString").Value;
-                string queryString = "DELETE FROM Usuarios WHERE id_usuario = @id";
+                string queryString = "DELETE FROM Actividades WHERE id_usuario = @id " +
+                    "DELETE FROM Usuarios WHERE id_usuario = @id";
 
                 using (SqlConnection connection = new SqlConnection(connectionString))
                 {

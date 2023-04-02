@@ -15,7 +15,7 @@
         <mat-label>Fecha de nacimiento</mat-label>
         <input matInput [disabled]="true" [matDatepickerFilter]="dateFilter" [matDatepicker]="dp" formControlName="dateFormControl">
         <mat-datepicker-toggle matIconSuffix [for]="dp" style="float: right;"></mat-datepicker-toggle>
-        <mat-datepicker #dp [disabled]="false"></mat-datepicker>
+        <mat-datepicker #dp [disabled]="false" [startAt]="startDate"></mat-datepicker>
     </mat-form-field>
     <mat-form-field appearance="fill">
         <mat-label>Teléfono</mat-label>
@@ -33,4 +33,10 @@
     <button type="submit" [disabled]="!userForm.valid" style="margin-top: 20px;" mat-raised-button (click)="saveUser()">
         Registrar Usuario
     </button>
+    <span class="success" *ngIf="success">
+        Usuario registrado con éxito
+    </span>
+    <span class="error" *ngIf="error">
+        Ha ocurrido un error
+    </span>
 </form>
